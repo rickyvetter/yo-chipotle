@@ -1,0 +1,19 @@
+{
+  "name": "yo-chipotle",
+  "version": "0.0.0",
+  "description": "Yo the closest chipotle",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "yo",
+    "chipotle"
+  ],
+  "author": "Ricky Vetter",
+  "license": "MIT",
+  "dependencies": {
+    "google-places": "0.0.2",
+    "yo-api": "^1.1.2"
+  }
+}
