@@ -33,7 +33,7 @@ http.createServer(function (request, response) {
     });
   }
 
-  res.writeHead(200, {"Content-Type": "text/plain"});
-  res.end("Yo");
+  response.writeHead(200, {"Content-Type": "text/plain"});
+  response.end("Yo");
 }).listen(process.env.PORT || 5000);
 console.log('Server running at http://127.0.0.1:1337/');
