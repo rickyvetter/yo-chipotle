@@ -11,7 +11,7 @@ var yo = new Yo(process.env.YO_API_KEY);
 http.createServer(function (request, response) {
   var url_parts = url.parse(request.url, true);
   var params = url_parts.query;
-  if(query.username && query.location) {
+  if(params.username && params.location) {
     var username = params.username;
     var userLocation = params.location.split(";");
     var GooglePlacesOptions = {
@@ -32,7 +32,7 @@ http.createServer(function (request, response) {
       });
     });
   }
-  
+
   res.writeHead(200, {"Content-Type": "text/plain"});
   res.end("Yo");
 }).listen(process.env.PORT || 5000);
