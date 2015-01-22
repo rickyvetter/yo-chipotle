@@ -11,25 +11,28 @@ var yo = new Yo(process.env.YO_API_KEY);
 http.createServer(function (request, response) {
   var url_parts = url.parse(request.url, true);
   var params = url_parts.query;
-  var username = params.username;
-  var userLocation = params.location.split(";");
-  var GooglePlacesOptions = {
-    keyword: "Chipotle Mexican Grill",
-    name: "Chipotle",
-    types: ["food", "restaurant"],
-    location: [userLocation[0],userLocation[1]],
-    rankby: "distance",
-    radius: null
-  };
+  if(query.username && query.location) {
+    var username = params.username;
+    var userLocation = params.location.split(";");
+    var GooglePlacesOptions = {
+      keyword: "Chipotle Mexican Grill",
+      name: "Chipotle",
+      types: ["food", "restaurant"],
+      location: [userLocation[0],userLocation[1]],
+      rankby: "distance",
+      radius: null
+    };
 
-  places.search(GooglePlacesOptions, function(err, response) {
-    var chipotle = response.results[0];
-    var chipotleLocation = chipotle.geometry.location;
-    console.log(userLocation, chipotleLocation);
-    yo.yo_location(username, chipotleLocation.lat, chipotleLocation.lng, function(err, res, body) {
-      console.log(err, body);
+    places.search(GooglePlacesOptions, function(err, response) {
+      var chipotle = response.results[0];
+      var chipotleLocation = chipotle.geometry.location;
+      console.log(userLocation, chipotleLocation);
+      yo.yo_location(username, chipotleLocation.lat, chipotleLocation.lng, function(err, res, body) {
+        console.log(err, body);
+      });
     });
-  });
+  }
+  
   res.writeHead(200, {"Content-Type": "text/plain"});
   res.end("Yo");
 }).listen(process.env.PORT || 5000);
